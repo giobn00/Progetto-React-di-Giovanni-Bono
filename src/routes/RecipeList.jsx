@@ -93,8 +93,11 @@ const mock_data = [
   }]
 
 const RecipeList = () => {
+  const API_Key = "c9602d561aa44e76949b04c6f0ba2403";
+  const SearchParameter = "diet=vegetarian";
   const [searchQuery, setSearchQuery] = useState('');
   const [searchParams] = useSearchParams();
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(searchParams);
@@ -102,7 +105,11 @@ const RecipeList = () => {
     setSearchQuery(query);
 
     // Simulate fetching data based on the search query
-    console.log(`Fetching results for: ${query}`);
+    fetch( `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key}&${SearchParameter}&query=${searchQuery}` )
+      .then((res) => res.json())
+      .then((res) => {
+        setResponse(res.results);
+      });
   }, [searchParams]);
 
 
@@ -113,13 +120,13 @@ const RecipeList = () => {
         <p>Search Term: {searchQuery}</p>
       </div> 
       */}
-      {mock_data.map(each =>
+      {response.map(each =>
       <Link to={`/recipe-detail/${each.id}`}>
         <Card>
           <CardHeader>
             <img className="object-cover h-48 w-full rounded" src={each.image} alt="Alt from image" />
             <br/>
-            <CardTitle>{each.name}</CardTitle>
+            <CardTitle>{each.title}</CardTitle>
             <CardDescription>{each.description}</CardDescription>
           </CardHeader>
           <CardContent>
