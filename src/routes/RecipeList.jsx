@@ -20,15 +20,12 @@ const RecipeList = () => {
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Failed to load</div>
 
+  console.log(data.results)
+
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {/*<div>
-        <h1>Search Results</h1>
-        <p>Search Term: {searchQuery}</p>
-      </div> 
-      */}
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
       {data.results.map(each =>
-      <Link to={`/recipe-detail/${each.id}`}>
+      <Link to={`/recipe-detail/${each.id}`} state={{ img : each.image, title : each.title }}>
         <Card>
           <CardHeader>
             <img className="object-cover h-48 w-full rounded" src={each.image} alt="Alt from image" />
