@@ -20,7 +20,7 @@ const RecipeDetail = () => {
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>Failed to load</div>
     return (
-        <div className="rounded overflow-hidden flex flex-col max-w-xl mx-auto" aria-label={recepeid}>
+        <div className="rounded overflow-hidden flex flex-col max-w-xl mx-auto p-3" aria-label={recepeid}>
             <Card>
                 <CardHeader>
                     <a href="#">
@@ -36,14 +36,15 @@ const RecipeDetail = () => {
                 </CardHeader>
                 <CardContent>
                     <h2 className="mb-2 text-xl font-medium leading-tight">
-                        Ingredienti :
+                        Ingredients :
                     </h2>
                     <div  className="block w-full max-w-[30rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                         <ul className="w-full">
                             {data.ingredients.map(
                                 each => 
                                 <li className="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3  dark:border-white/10" ala>
-                                    <p>{each.name} quantita` = {each.amount.metric.value + each.amount.metric.unit}</p>
+                                    <p>{each.name}</p>
+                                    <p>Amount = {each.amount.metric.value + each.amount.metric.unit}</p>
                                 </li>         
                             )}
                         </ul>
