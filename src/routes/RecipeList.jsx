@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSearchParams, Link } from 'react-router-dom';
 import useSWR from "swr";
 import {
@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
+import NotFound from "@/src/routes/NotFound"
 
 const API_Key = import.meta.env.VITE_API_KEY ;
 const fetcher = (...args) => fetch(...args).then(res => res.json())
@@ -20,9 +20,8 @@ const RecipeList = () => {
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Failed to load</div>
 
-  console.log(data.results)
-
-  return (
+  if(data.results.length == 0){ return <NotFound />}
+  else return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-3">
       {data.results.map(each =>
       <Link to={`/recipe-detail/${each.id}`} state={{ img : each.image, title : each.title }}>

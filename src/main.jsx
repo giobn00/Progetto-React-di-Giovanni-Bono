@@ -26,7 +26,12 @@ const router = createBrowserRouter([
       {
         path: "recipe-detail/:recepeid",
         element: <RecipeDetail />,
+      },
+      {
+        path: "NotFound",
+        element: <div>Not Found</div>
       }
+
     ]
   }
 ])
